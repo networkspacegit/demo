@@ -9,8 +9,11 @@
 import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QWidget, QApplication
-
+from PyQt5.QtWidgets import QWidget, QApplication, QHBoxLayout, QVBoxLayout
+import UserManage
+import dropbookdialog
+import addbookdialog
+import BookStorageViewer
 
 class Ui_Form(QWidget):
     def __init__(self):
@@ -20,12 +23,17 @@ class Ui_Form(QWidget):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(900, 600)
+
+        self.layout = QHBoxLayout()
+        self.buttonlayout = QVBoxLayout()
+        self.setLayout(self.layout)
+
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
         Form.setSizePolicy(sizePolicy)
-        Form.setStyleSheet("background-color: rgb(247, 253, 255);")
+        #Form.setStyleSheet("background-color: rgb(247, 253, 255);")
         self.addBookButton = QtWidgets.QPushButton(Form)
         self.addBookButton.setGeometry(QtCore.QRect(10, 90, 100, 42))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -75,6 +83,14 @@ class Ui_Form(QWidget):
         self.userManageButton.setFont(font)
         self.userManageButton.setObjectName("userManageButton")
 
+        self.buttonlayout.addWidget(self.addBookButton)
+        self.buttonlayout.addWidget(self.dropBookButton)
+        self.buttonlayout.addWidget(self.userManageButton)
+        self.layout.addLayout(self.buttonlayout)
+        self.storageView = BookStorageViewer.Ui_Form()
+        self.layout.addWidget(self.storageView)    #需手动加入layout，否则无法显示
+
+
         self.retranslateUi(Form)
         self.addBookButton.clicked.connect(Form.addBookButtonClicked)
         self.dropBookButton.clicked.connect(Form.dropBookButtonClicked)
@@ -89,15 +105,19 @@ class Ui_Form(QWidget):
         self.userManageButton.setText(_translate("Form", "用户管理"))
 
     def addBookButtonClicked(self):
-
-        pass
+        addDialog = addbookdialog.Ui_Dialog()
+        addDialog.show()
+        addDialog.exec_()
 
     def dropBookButtonClicked(self):
-
-        pass
+        dropDialog = dropbookdialog.Ui_Dialog()
+        dropDialog.show()
+        dropDialog.exec_()
 
     def userManage(self):
-        pass
+        UserDelete = UserManage.Ui_Dialog()
+        UserDelete.show()
+        UserDelete.exec_()
 
 
 if __name__ == "__main__":

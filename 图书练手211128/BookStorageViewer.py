@@ -84,11 +84,14 @@ class Ui_Form(QWidget):
         font.setPointSize(15)
         self.condisionComboBox.setFont(font)
         self.condisionComboBox.setObjectName("condisionComboBox")
-        self.condisionComboBox.addItem("")
-        self.condisionComboBox.addItem("")
-        self.condisionComboBox.addItem("")
-        self.condisionComboBox.addItem("")
-        self.condisionComboBox.addItem("")
+        # self.condisionComboBox.addItem("")  #此方法 condisionComboBox 当前默认值为'按出版社查询'而不是'按书名查询'
+        # self.condisionComboBox.addItem("")
+        # self.condisionComboBox.addItem("")
+        # self.condisionComboBox.addItem("")
+        # self.condisionComboBox.addItem("")
+        searchCondision = ['按书名查询', '按书号查询', '按作者查询', '按分类查询', '按出版社查询']
+        self.condisionComboBox.addItems(searchCondision)
+
         self.horizontalLayout.addWidget(self.condisionComboBox)
         self.verticalLayout.addLayout(self.horizontalLayout)
 
@@ -220,11 +223,11 @@ class Ui_Form(QWidget):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "欢迎使用图书馆管理系统"))
         self.searchButton.setText(_translate("Form", "查询"))
-        self.condisionComboBox.setItemText(0, _translate("Form", "按书名查询"))
-        self.condisionComboBox.setItemText(1, _translate("Form", "按书号查询"))
-        self.condisionComboBox.setItemText(2, _translate("Form", "按作者查询"))
-        self.condisionComboBox.setItemText(3, _translate("Form", "按分类查询"))
-        self.condisionComboBox.setItemText(4, _translate("Form", "按出版社查询"))
+        # self.condisionComboBox.setItemText(0, _translate("Form", "按书名查询"))
+        # self.condisionComboBox.setItemText(1, _translate("Form", "按书号查询"))
+        # self.condisionComboBox.setItemText(2, _translate("Form", "按作者查询"))
+        # self.condisionComboBox.setItemText(3, _translate("Form", "按分类查询"))
+        # self.condisionComboBox.setItemText(4, _translate("Form", "按出版社查询"))
         self.jumpToLabel.setText(_translate("Form", "跳转到第"))
         # self.pageEdit.setText(_translate("Form", "1"))
         # self.pageLabel.setText(_translate("Form", "/2页"))
@@ -232,21 +235,24 @@ class Ui_Form(QWidget):
         self.prevButton.setText(_translate("Form", "前一页"))
         self.backButton.setText(_translate("Form", "后一页"))
 
-    def setButtonStatus(self):
-        if (self.currentPage == self.totalPage):
-            self.prevButton.setEnabled(True)
-            self.backButton.setEnabled(False)
-        if (self.currentPage == 1):
-            self.backButton.setEnabled(True)
-            self.prevButton.setEnabled(False)
-        if (self.currentPage < self.totalPage and self.currentPage > 1):
-            self.prevButton.setEnabled(True)
-            self.backButton.setEnabled(True)
+
+    def searchButtonClicked(self):
+        #self.tableView.setModel(self.queryModel)
+        self.currentPage =1
+        self.pageEdit.setText(str(self.currentPage))
+        self.getPageCount()
+        s = "/" + str(int(self.totalPage)) + "页"
+        self.pageLabel.setText(s)
+        index = (self.currentPage - 1) * self.pageRecord
+        self.recordQuery(index)
+        return
+
 
     # 得到记录数
     def getTotalRecordCount(self):
         self.queryModel.setQuery("SELECT * FROM Book")
         self.totalRecord = self.queryModel.rowCount()
+        #print(self.totalRecord)
         return
 
     # 得到总页数
@@ -254,13 +260,14 @@ class Ui_Form(QWidget):
         self.getTotalRecordCount()
         # 上取整
         self.totalPage = int((self.totalRecord + self.pageRecord - 1) / self.pageRecord)
-        print(self.totalPage)
+        #print(self.totalPage)
         return
 
     # 分页记录查询
     def recordQuery(self, index):
         queryCondition = ""
         conditionChoice = self.condisionComboBox.currentText()
+        print('self.condisionComboBox.currentText():',conditionChoice)
         if (conditionChoice == "按书名查询"):
             conditionChoice = 'BookName'
         elif (conditionChoice == "按书号查询"):
@@ -283,6 +290,11 @@ class Ui_Form(QWidget):
                         "select * from Book ORDER BY %s  limit %d,%d " % (conditionChoice, index, self.pageRecord))
             self.queryModel.setQuery(queryCondition)
             self.setButtonStatus()
+
+            print('conditionChoice', conditionChoice)
+            print('index', index)
+            print('pageRecord', self.pageRecord)
+
             return
 
         # 得到模糊查询条件
@@ -290,6 +302,8 @@ class Ui_Form(QWidget):
         s = '%'
         for i in range(0, len(temp)):
             s = s + temp[i] + "%"
+        print('s', s)
+        print('index', index)
         queryCondition = ("SELECT * FROM Book WHERE %s LIKE '%s' ORDER BY %s " % (
             conditionChoice, s, conditionChoice))
         self.queryModel.setQuery(queryCondition)
@@ -307,6 +321,8 @@ class Ui_Form(QWidget):
                         "select * from Book ORDER BY %s  limit %d,%d " % (conditionChoice, index, self.pageRecord))
             self.queryModel.setQuery(queryCondition)
             self.setButtonStatus()
+
+            print('index', index)
             return
         self.totalPage = int((self.totalRecord + self.pageRecord - 1) / self.pageRecord)
         label = "/" + str(int(self.totalPage)) + "页"
@@ -315,17 +331,8 @@ class Ui_Form(QWidget):
             conditionChoice, s, conditionChoice, index, self.pageRecord))
         self.queryModel.setQuery(queryCondition)
         self.setButtonStatus()
-        return
 
-    # 点击查询
-    def searchButtonClicked(self):
-        self.currentPage = 1
-        self.pageEdit.setText(str(self.currentPage))
-        self.getPageCount()
-        s = "/" + str(int(self.totalPage)) + "页"
-        self.pageLabel.setText(s)
-        index = (self.currentPage - 1) * self.pageRecord
-        self.recordQuery(index)
+        print('index', index)
         return
 
     # 向前翻页
@@ -362,6 +369,17 @@ class Ui_Form(QWidget):
         self.pageEdit.setText(str(self.currentPage))
         self.recordQuery(index)
         return
+
+    def setButtonStatus(self):
+        if (self.currentPage == self.totalPage):
+            self.prevButton.setEnabled(True)
+            self.backButton.setEnabled(False)
+        if (self.currentPage == 1):
+            self.backButton.setEnabled(True)
+            self.prevButton.setEnabled(False)
+        if (self.currentPage < self.totalPage and self.currentPage > 1):
+            self.prevButton.setEnabled(True)
+            self.backButton.setEnabled(True)
 
 
 if __name__ == "__main__":

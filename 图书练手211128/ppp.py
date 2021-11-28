@@ -5,18 +5,16 @@
 # @Link    : https://blog.csdn.net/qiqiyingse/
 
 import sys
-
-from PyQt5 import sip
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import qdarkstyle
 from PyQt5.QtSql import *
 import time
-#import sip
+import sip
 #from db.userInfoManager import dbpath
 import images
-dbpath='./db/LibraryManagement.db'
+
 
 class UserManage(QDialog):
     def __init__(self, parent=None):
@@ -35,7 +33,7 @@ class UserManage(QDialog):
 
     def setUpUI(self):
         self.db = QSqlDatabase.addDatabase("QSQLITE")
-        self.db.setDatabaseName(dbpath)
+        self.db.setDatabaseName('./db/LibraryManagement.db')
         self.db.open()
         self.query = QSqlQuery()
         self.getResult()
@@ -127,13 +125,13 @@ class UserManage(QDialog):
 
     def getResult(self):
         # sql = "SELECT userid,Name FROM User WHERE IsAdmin=0"
-        sql = "SELECT userid,Name,IsAdmin FROM User"
+        sql = "SELECT StudentId,Name,IsAdmin FROM User"
         self.query.exec_(sql)
         self.userCount = 0;
         while (self.query.next()):
             self.userCount += 1;
         # sql = "SELECT userid,Name FROM User WHERE IsAdmin=0"
-        sql = "SELECT userid,Name,IsAdmin FROM User"
+        sql = "SELECT StudentId,Name,IsAdmin FROM User"
         self.query.exec_(sql)
 
     def setRows(self):
@@ -266,7 +264,7 @@ class UserManage(QDialog):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     # app.setWindowIcon(QIcon("./images/MainWindow_1.png"))
-    #app.setWindowIcon(QIcon(":/images/MainWindow_1.png"))
+    app.setWindowIcon(QIcon(":/images/MainWindow_1.png"))
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     mainMindow = UserManage()
     mainMindow.show()
