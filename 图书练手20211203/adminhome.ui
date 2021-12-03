@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>&quot;欢迎登陆图书馆管理系统&quot;</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(247, 253, 255);</string>
+  </property>
+  <widget class="QPushButton" name="addBookButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>100</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>100</width>
+     <height>42</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>100</width>
+     <height>42</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>添加书籍</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="dropBookButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>270</y>
+     <width>100</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>100</width>
+     <height>42</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>100</width>
+     <height>42</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>淘汰书籍</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="userManageButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>450</y>
+     <width>100</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>100</width>
+     <height>42</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>100</width>
+     <height>42</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>用户管理</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>addBookButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>addBookButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>71</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>151</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dropBookButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>dropBookButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>61</x>
+     <y>312</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>userManageButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>userManage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>80</x>
+     <y>483</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>84</x>
+     <y>507</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>SignUp()</slot>
+  <slot>addBookButtonClicked()</slot>
+  <slot>dropBookButtonClicked()</slot>
+  <slot>userManage()</slot>
+ </slots>
+</ui>
