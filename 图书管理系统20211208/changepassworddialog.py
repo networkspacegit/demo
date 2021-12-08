@@ -1,0 +1,257 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'changepassworddialog.ui'
+#
+# Created by: PyQt5 UI code generator 5.13.0
+#
+# WARNING! All changes made in this file will be lost!
+import hashlib
+import sys
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox, QLineEdit
+from dbmanager import userDbManager
+
+
+class Ui_Dialog(QDialog):
+    def __init__(self, parent=None):
+        super(Ui_Dialog, self).__init__(parent)
+        self.userdb = userDbManager()
+        self.setupUi(self)
+
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(299, 346)
+        Dialog.setStyleSheet("background-color: rgb(239, 251, 255);")
+        self.widget = QtWidgets.QWidget(Dialog)
+        self.widget.setGeometry(QtCore.QRect(9, 0, 281, 341))
+        self.widget.setObjectName("widget")
+        self.formLayout = QtWidgets.QFormLayout(self.widget)
+        self.formLayout.setContentsMargins(0, 25, 0, 0)
+        self.formLayout.setVerticalSpacing(20)
+        self.formLayout.setObjectName("formLayout")
+        self.titlelabel = QtWidgets.QLabel(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.titlelabel.sizePolicy().hasHeightForWidth())
+        self.titlelabel.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setWeight(50)
+        self.titlelabel.setFont(font)
+        self.titlelabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.titlelabel.setObjectName("titlelabel")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.titlelabel)
+        self.userIDLabel = QtWidgets.QLabel(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.userIDLabel.sizePolicy().hasHeightForWidth())
+        self.userIDLabel.setSizePolicy(sizePolicy)
+        self.userIDLabel.setMinimumSize(QtCore.QSize(91, 31))
+        self.userIDLabel.setMaximumSize(QtCore.QSize(91, 31))
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(12)
+        self.userIDLabel.setFont(font)
+        self.userIDLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.userIDLabel.setObjectName("userIDLabel")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.userIDLabel)
+        self.userIDEdit = QtWidgets.QLineEdit(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.userIDEdit.sizePolicy().hasHeightForWidth())
+        self.userIDEdit.setSizePolicy(sizePolicy)
+        self.userIDEdit.setMinimumSize(QtCore.QSize(181, 31))
+        self.userIDEdit.setMaximumSize(QtCore.QSize(181, 31))
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(12)
+        self.userIDEdit.setFont(font)
+        self.userIDEdit.setMaxLength(10)
+        self.userIDEdit.setObjectName("userIDEdit")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.userIDEdit)
+        self.oldPasswordLabel = QtWidgets.QLabel(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.oldPasswordLabel.sizePolicy().hasHeightForWidth())
+        self.oldPasswordLabel.setSizePolicy(sizePolicy)
+        self.oldPasswordLabel.setMinimumSize(QtCore.QSize(91, 31))
+        self.oldPasswordLabel.setMaximumSize(QtCore.QSize(91, 31))
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(12)
+        self.oldPasswordLabel.setFont(font)
+        self.oldPasswordLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.oldPasswordLabel.setObjectName("oldPasswordLabel")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.oldPasswordLabel)
+        self.oldPasswordEdit = QtWidgets.QLineEdit(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.oldPasswordEdit.sizePolicy().hasHeightForWidth())
+        self.oldPasswordEdit.setSizePolicy(sizePolicy)
+        self.oldPasswordEdit.setMinimumSize(QtCore.QSize(181, 31))
+        self.oldPasswordEdit.setMaximumSize(QtCore.QSize(181, 31))
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(12)
+        self.oldPasswordEdit.setFont(font)
+        self.oldPasswordEdit.setMaxLength(16)
+        self.oldPasswordEdit.setObjectName("oldPasswordEdit")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.oldPasswordEdit)
+        self.passwordLabel = QtWidgets.QLabel(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.passwordLabel.sizePolicy().hasHeightForWidth())
+        self.passwordLabel.setSizePolicy(sizePolicy)
+        self.passwordLabel.setMinimumSize(QtCore.QSize(91, 31))
+        self.passwordLabel.setMaximumSize(QtCore.QSize(91, 31))
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(12)
+        self.passwordLabel.setFont(font)
+        self.passwordLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.passwordLabel.setObjectName("passwordLabel")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.passwordLabel)
+        self.passwordEdit = QtWidgets.QLineEdit(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.passwordEdit.sizePolicy().hasHeightForWidth())
+        self.passwordEdit.setSizePolicy(sizePolicy)
+        self.passwordEdit.setMinimumSize(QtCore.QSize(181, 31))
+        self.passwordEdit.setMaximumSize(QtCore.QSize(181, 31))
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(12)
+        self.passwordEdit.setFont(font)
+        self.passwordEdit.setText("")
+        self.passwordEdit.setMaxLength(16)
+        self.passwordEdit.setObjectName("passwordEdit")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.passwordEdit)
+        self.confirmPasswordLabel = QtWidgets.QLabel(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.confirmPasswordLabel.sizePolicy().hasHeightForWidth())
+        self.confirmPasswordLabel.setSizePolicy(sizePolicy)
+        self.confirmPasswordLabel.setMinimumSize(QtCore.QSize(91, 31))
+        self.confirmPasswordLabel.setMaximumSize(QtCore.QSize(91, 31))
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(12)
+        self.confirmPasswordLabel.setFont(font)
+        self.confirmPasswordLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.confirmPasswordLabel.setObjectName("confirmPasswordLabel")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.confirmPasswordLabel)
+        self.confirmPasswordEdit = QtWidgets.QLineEdit(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.confirmPasswordEdit.sizePolicy().hasHeightForWidth())
+        self.confirmPasswordEdit.setSizePolicy(sizePolicy)
+        self.confirmPasswordEdit.setMinimumSize(QtCore.QSize(181, 31))
+        self.confirmPasswordEdit.setMaximumSize(QtCore.QSize(181, 31))
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(12)
+        self.confirmPasswordEdit.setFont(font)
+        self.confirmPasswordEdit.setText("")
+        self.confirmPasswordEdit.setMaxLength(16)
+        self.confirmPasswordEdit.setObjectName("confirmPasswordEdit")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.confirmPasswordEdit)
+        self.changePasswordButton = QtWidgets.QPushButton(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.changePasswordButton.sizePolicy().hasHeightForWidth())
+        self.changePasswordButton.setSizePolicy(sizePolicy)
+        self.changePasswordButton.setMinimumSize(QtCore.QSize(111, 35))
+        self.changePasswordButton.setMaximumSize(QtCore.QSize(111, 35))
+        font = QtGui.QFont()
+        font.setFamily("宋体")
+        font.setPointSize(12)
+        self.changePasswordButton.setFont(font)
+        self.changePasswordButton.setObjectName("changePasswordButton")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.changePasswordButton)
+
+        # 设置密码掩膜
+        # QLineEdit.Password输入字符后就立马显示为星号
+        # QLineEdit.PasswordEchoOnEdit为输入时为字符，失去焦点为星号
+
+        self.oldPasswordEdit.setEchoMode(QLineEdit.Password)
+        self.passwordEdit.setEchoMode(QLineEdit.Password)
+        self.confirmPasswordEdit.setEchoMode(QLineEdit.Password)
+
+        # self.oldPasswordEdit.setEchoMode(QLineEdit.PasswordEchoOnEdit)
+        # self.passwordEdit.setEchoMode(QLineEdit.PasswordEchoOnEdit)
+        # self.confirmPasswordEdit.setEchoMode(QLineEdit.PasswordEchoOnEdit)
+
+        self.retranslateUi(Dialog)
+        self.changePasswordButton.clicked.connect(Dialog.changePasswordButtonClicked)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self, Dialog):
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "修改密码"))
+        self.titlelabel.setText(_translate("Dialog", "修改密码"))
+        self.userIDLabel.setText(_translate("Dialog", "账    号："))
+        self.oldPasswordLabel.setText(_translate("Dialog", "旧 密 码："))
+        self.passwordLabel.setText(_translate("Dialog", "新 密 码："))
+        self.confirmPasswordLabel.setText(_translate("Dialog", "确认密码："))
+        self.changePasswordButton.setText(_translate("Dialog", "确认修改"))
+
+    def changePasswordButtonClicked(self):
+        userID = self.userIDEdit.text()
+        oldPassword = self.oldPasswordEdit.text()
+        password = self.passwordEdit.text()
+        confirmPassword = self.confirmPasswordEdit.text()
+        if(userID == "" or oldPassword == "" or password == "" or confirmPassword == ""):
+            print(QMessageBox.warning(self, "警告", "输入不可为空，请重新输入", QMessageBox.Yes, QMessageBox.Yes))
+            return
+        elif(password != confirmPassword):
+            print(QMessageBox.warning(self, "警告", "两次输入密码不同,请确认输入", QMessageBox.Yes, QMessageBox.Yes))
+            self.passwordEdit.clear()
+            self.confirmPasswordEdit.clear()
+            return
+        userinfo = self.userdb.querybyUserid(userID)
+        #print(userinfo)
+        # 如果用户不存在
+        if(not userinfo):
+            print(QMessageBox.warning(self, "警告", "该用户不存在，请重新输入", QMessageBox.Yes, QMessageBox.Yes))
+            self.userIDEdit.clear()
+            return
+
+
+        hl = hashlib.md5()
+        hl.update(oldPassword.encode(encoding='utf-8'))
+        md5password = hl.hexdigest()
+        # 如果密码错误
+        if (md5password != userinfo[0][2]):
+            print(QMessageBox.warning(self, "警告", "原密码输入错误,请重新输入", QMessageBox.Yes, QMessageBox.Yes))
+            self.oldPasswordEdit.clear()
+            return
+
+        # 修改密码
+        hl = hashlib.md5()
+        hl.update(password.encode(encoding='utf-8'))
+        newmd5password = hl.hexdigest()
+
+        self.userdb.updatePassword(newmd5password, userID)
+        QMessageBox.information(self, "提醒", "修改密码成功，请登录系统!", QMessageBox.Yes, QMessageBox.Yes)
+        self.close()
+        return
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    mainMindow = Ui_Dialog()
+    mainMindow.show()
+    sys.exit(app.exec_())
